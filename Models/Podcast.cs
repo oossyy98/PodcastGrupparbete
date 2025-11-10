@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    internal class Podcast
+    public class Podcast
     {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string RssUrl { get; set; }
+        public string Category { get; set; }
     }
 }

@@ -11,7 +11,6 @@ namespace DAL
         //CREATE
        void Insert(T item)
 
-
         //READ
         T GetById(int id);
         IEnumerable<T> GetAll(); //Kolla vad den gör
@@ -23,3 +22,4 @@ namespace DAL
         void Delete(int id);
     }
 }
+// Ska vi ha Async metoder här också?
