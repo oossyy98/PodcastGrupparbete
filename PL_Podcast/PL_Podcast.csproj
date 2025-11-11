@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BL_BusinessLogic\BL_BusinessLogic.csproj" />
+    <ProjectReference Include="..\Dataatkomst_DAL\DAL_DataAccess.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 

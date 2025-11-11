@@ -21,7 +21,20 @@ namespace DAL_DataAccess
 
         public async Task Create(Podcast item)
         {
-            await _kollektion.InsertOneAsync(item);
+            using (var session = await _connection.HamtaKlient().StartSessionAsync())
+            {
+                session.StartTransaction();
+                try
+                {
+                    await _kollektion.InsertOneAsync(session, item);
+                    await session.CommitTransactionAsync();
+                }
+                catch
+                {
+                    await session.AbortTransactionAsync();
+                    throw;
+                }
+            }
         }
 
         public async Task<Podcast> GetById(string id)
