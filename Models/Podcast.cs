@@ -26,6 +26,11 @@ namespace Models
         [BsonElement("avsnitt")]
         public List<Avsnitt> Avsnitt { get; set; }
 
+        public string hej()
+        {
+            return "hej";
+        }
+
         public Podcast()
         {
             Avsnitt = new List<Avsnitt>();
