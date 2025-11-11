@@ -9,6 +9,10 @@ namespace Models
 {
     public class Avsnitt
     {
+        [BsonId]
+        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
+            public string Id { get; set; }
+
         [BsonElement("titel")]
         public string Titel { get; set; }
         [BsonElement("beskrivning")]
