@@ -21,20 +21,7 @@ namespace DAL_DataAccess
 
         public async Task Create(Podcast item)
         {
-            using (var session = await _connection.HamtaKlient().StartSessionAsync())
-            {
-                session.StartTransaction();
-                try
-                {
-                    await _kollektion.InsertOneAsync(session, item);
-                    await session.CommitTransactionAsync();
-                }
-                catch
-                {
-                    await session.AbortTransactionAsync();
-                    throw;
-                }
-            }
+           await _kollektion.InsertOneAsync(item);
         }
 
         public async Task<Podcast> GetById(string id)
@@ -45,7 +32,8 @@ namespace DAL_DataAccess
 
         public async Task<IEnumerable<Podcast>> GetAllAsync()
         {
-            return await _kollektion.Find(_ => true).ToListAsync();
+            var filter = Builders<Podcast>.Filter.Empty;
+            return await _kollektion.Find(filter).ToListAsync();
         }
 
         public async Task Update(string id, Podcast item)
