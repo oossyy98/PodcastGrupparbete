@@ -20,27 +20,70 @@ namespace DAL_DataAccess
         }
         public async Task Create(Kategori item)
         {
-            await _kollektion.InsertOneAsync(item);
+            try
+            {
+                await _kollektion.InsertOneAsync(item);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid skapande: {ex.Message}");
+                throw;
+            }
         }
 
-        public Task Delete(string id)
+        public async Task Delete(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filter = Builders<Kategori>.Filter.Eq(k => k.Id, id);
+                await _kollektion.DeleteOneAsync(filter);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid borttagning av kategori {id}: {ex.Message}");
+                throw;
+            }
         }
 
-        public Task<IEnumerable<Kategori>> GetAllAsync()
+        public async Task<IEnumerable<Kategori>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _kollektion.Find(FilterDefinition<Kategori>.Empty).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid hämtning av alla kategorier: {ex.Message}");
+                throw;
+            }
         }
 
-        public Task<Kategori> GetById(string id)
+        public async Task<Kategori> GetById(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filter = Builders<Kategori>.Filter.Eq(k => k.Id, id);
+                return await _kollektion.Find(filter).FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid hämtning av kategori {id}: {ex.Message}");
+                throw;
+            }
         }
 
-        public Task Update(string id, Kategori item)
+        public async Task Update(string id, Kategori item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filter = Builders<Kategori>.Filter.Eq(k => k.Id, id);
+                await _kollektion.ReplaceOneAsync(filter, item);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid uppdatering av kategori {id}: {ex.Message}");
+                throw;
+            }
         }
     }
 }
