@@ -9,17 +9,17 @@ namespace DAL
     public interface IRepository<T> where T : class
     {
         //CREATE
-       void Insert(T item)
+       Task Insert(T item)
 
         //READ
-        T GetById(int id);
+        Task<T> GetById(string id);
         IEnumerable<T> GetAll(); //Kolla vad den gör
 
         //UPDATE
-        void Update(T item);
+        Task Update(T item);
 
         //DELETE
-        void Delete(int id);
+        Task Delete(string id);
     }
 }
 // Ska vi ha Async metoder här också?
