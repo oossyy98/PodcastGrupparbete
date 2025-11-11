@@ -11,10 +11,10 @@ namespace DAL_DataAccess
     {
         private readonly IMongoDatabase _databas;
 
-        public MongoDBConnection(string anslutningsStrang, string databasNamn)
+        public MongoDBConnection()
         {
-            var klient = new MongoClient(anslutningsStrang);
-            _databas = klient.GetDatabase(databasNamn);
+            var klient = new MongoClient("mongodb+srv://OruMongoDBAdmin:<OruPassword@orumongodb.nzapwps.mongodb.net/?appName=OruMongoDB");
+            var databas = klient.GetDatabase("OruMongoDB");
         }
 
         public IMongoCollection<T> HamtaKollektion<T>(string kollektionsNamn)

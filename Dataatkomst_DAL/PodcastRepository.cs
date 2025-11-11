@@ -13,10 +13,10 @@ namespace DAL_DataAccess
         private readonly IMongoCollection<Podcast> _kollektion; //MongoDB collection for Podcast
         private readonly MongoDBConnection _connection;
 
-        public PodcastRepository(MongoDBConnection anslutning)
+        public PodcastRepository()
         {
-            _connection = anslutning;
-            _kollektion = anslutning.HamtaKollektion<Podcast>("podcasts");
+            _connection = new MongoDBConnection();
+            _kollektion = _connection.HamtaKollektion<Podcast>("podcasts");
         }
 
         public async Task Create(Podcast item)
@@ -24,10 +24,28 @@ namespace DAL_DataAccess
             await _kollektion.InsertOneAsync(item);
         }
 
-        public string hej()
+        public async Task<Podcast> GetById(string id)
         {
-            return "hej";
+            var filter = Builders<Podcast>.Filter.Eq(p => p.Id, id);
+            return await _kollektion.Find(filter).FirstOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<Podcast>> GetAllAsync()
+        {
+            return await _kollektion.Find(_ => true).ToListAsync();
+        }
+
+        public async Task Update(string id, Podcast item)
+        {
+            var filter = Builders<Podcast>.Filter.Eq(p => p.Id, id);
+            await _kollektion.ReplaceOneAsync(filter, item);
+        }
+
+        public async Task Delete(string id)
+        {
+            var filter = Builders<Podcast>.Filter.Eq(p => p.Id, id);
+            await _kollektion.DeleteOneAsync(filter);
+
+        }
     }
 }
