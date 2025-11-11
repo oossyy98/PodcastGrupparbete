@@ -12,32 +12,79 @@ namespace DAL_DataAccess
 {
     public class AvsnittRepository : IRepository<Avsnitt>
     {
-        private readonly IMongoCollection<Avsnitt> _kollektion; //MongoDB collection for Avsnitt
+        private readonly IMongoCollection<Avsnitt> _kollektion; // MongoDB collection for Avsnitt
         private readonly MongoDBConnection _connection;
+
         public AvsnittRepository(MongoDBConnection anslutning)
         {
             _connection = anslutning;
             _kollektion = anslutning.HamtaKollektion<Avsnitt>("avsnitt");
         }
+
         public async Task Create(Avsnitt item)
         {
-            await _kollektion.InsertOneAsync(item);
+            try
+            {
+                await _kollektion.InsertOneAsync(item);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid skapande av avsnitt: {ex.Message}");
+                throw;
+            }
         }
-        public Task Delete(string id)
+
+        public async Task Delete(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filter = Builders<Avsnitt>.Filter.Eq(a => a.Id, id);
+                await _kollektion.DeleteOneAsync(filter);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid borttagning av avsnitt {id}: {ex.Message}");
+                throw;
+            }
         }
-        public Task<IEnumerable<Avsnitt>> GetAllAsync()
+
+        public async Task<IEnumerable<Avsnitt>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _kollektion.Find(FilterDefinition<Avsnitt>.Empty).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid hämtning av alla avsnitt: {ex.Message}");
+                throw;
+            }
         }
-        public Task<Avsnitt> GetById(string id)
+
+        public async Task<Avsnitt> GetById(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filter = Builders<Avsnitt>.Filter.Eq(a => a.Id, id);
+                return await _kollektion.Find(filter).FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid hämtning av avsnitt {id}: {ex.Message}");
+                throw;
+            }
         }
-        public Task Update(string id, Avsnitt item)
+
+        public async Task Update(string id, Avsnitt item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filter = Builders<Avsnitt>.Filter.Eq(a => a.Id, id);
+                await _kollektion.ReplaceOneAsync(filter, item);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Fel vid uppdatering av avsnitt {id}: {ex.Message}");
+                throw;
+            }
         }
-    }
-}
