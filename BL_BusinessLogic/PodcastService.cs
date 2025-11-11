@@ -39,6 +39,12 @@ namespace BL_BusinessLogic
         }
 
         //READ
+        public async Task<List<Podcast>> HamtaAlla()
+        {
+            var result = await _podcastRepo.GetAllAsync();
+            return result.ToList();
+        }
+
         public async Task<Podcast> HamtaMedId(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -47,11 +53,6 @@ namespace BL_BusinessLogic
             }
 
             return await _podcastRepo.GetById(id);
-        }
-
-        public async Task<IEnumerable<Podcast>> HamtaAllaPodcasts()
-        {
-            return await _podcastRepo.GetAllAsync();
         }
 
         //UPDATE
@@ -99,6 +100,5 @@ namespace BL_BusinessLogic
             await _podcastRepo.Delete(id);
             return true;
         }
-
     }
 }
