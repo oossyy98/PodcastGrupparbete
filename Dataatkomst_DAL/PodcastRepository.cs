@@ -24,5 +24,10 @@ namespace DAL_DataAccess
             await _kollektion.InsertOneAsync(item);
         }
 
+        public string hej()
+        {
+            return "hej";
+        }
+
     }
 }
