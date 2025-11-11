@@ -1,4 +1,4 @@
-namespace PodcastGrupparbete
+namespace PL_Podcast
 {
     public partial class Form1 : Form
     {

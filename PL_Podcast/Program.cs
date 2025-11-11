@@ -1,4 +1,4 @@
-namespace PodcastGrupparbete
+namespace PL_Podcast
 {
     internal static class Program
     {
