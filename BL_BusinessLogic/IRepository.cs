@@ -13,7 +13,7 @@ namespace DAL_DataAccess
 
         //READ
         Task<T> GetById(string id);
-        Task<List<T>> GetAll(); // kör iEnumable om det krånglar
+        Task<IEnumerable<T>> GetAllAsync();
 
         //UPDATE
         Task Update(string id, T item);
