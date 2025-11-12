@@ -10,11 +10,14 @@ namespace DAL_DataAccess
     public class MongoDBConnection
     {
         private readonly IMongoDatabase _databas;
+        //La till en för _klient
+        private readonly IMongoClient _klient;
 
         public MongoDBConnection()
         {
-            var klient = new MongoClient("mongodb+srv://OruMongoDBAdmin:<OruPassword@orumongodb.nzapwps.mongodb.net/?appName=OruMongoDB");
-            var databas = klient.GetDatabase("OruMongoDB");
+            // Tog bort < > runt lösenordet!, det ska ej vara med och var på klient och databas
+            _klient = new MongoClient("mongodb+srv://OruMongoDBAdmin:OruPassword@orumongodb.nzapwps.mongodb.net/?appName=OruMongoDB");
+            _databas = _klient.GetDatabase("OruMongoDB");
         }
 
         public IMongoCollection<T> HamtaKollektion<T>(string kollektionsNamn)
@@ -24,7 +27,8 @@ namespace DAL_DataAccess
 
         public IMongoClient HamtaKlient()
         {
-            return _databas.Client;
+            //ändrade denna från _databas.Client till _klient
+            return _klient;
         }
     }
 }
