@@ -71,7 +71,13 @@ namespace BL_BusinessLogic
                 return false;
             }
 
-            await _kategoriRepo.Update(id, kategori);
+            var uppdateradKategori = new Kategori
+            {
+                Id = befintligKategori.Id,
+                Namn = kategori.Namn
+            };
+
+            await _kategoriRepo.Update(id, uppdateradKategori);
             return true;
         }
 

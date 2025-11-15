@@ -190,6 +190,7 @@
             BtnUppdateraNamn.TabIndex = 13;
             BtnUppdateraNamn.Text = "Uppdatera namn";
             BtnUppdateraNamn.UseVisualStyleBackColor = true;
+            BtnUppdateraNamn.Click += BtnUppdateraNamn_Click;
             // 
             // button1
             // 

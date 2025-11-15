@@ -1,6 +1,7 @@
 using BL_BusinessLogic;
 using DAL_DataAccess;
 using Models;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PL_Podcast
@@ -115,7 +116,49 @@ namespace PL_Podcast
 
         private void ListKategorier_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(ListKategorier.SelectedItem != null)
+            {
+                var valdKategori = (Kategori)ListKategorier.SelectedItem;
+                TbxKategorier.Text = valdKategori.Namn;
+            }
 
+        }
+
+        private async void BtnUppdateraNamn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ListKategorier.SelectedItem == null)
+                {
+                    MessageBox.Show("Välj en kategori att uppdatera.");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(TbxKategorier.Text))
+                {
+                    MessageBox.Show("Ange ett nytt namn för kategorin.");
+                    return;
+                }
+
+                var valdKategori = (Kategori)ListKategorier.SelectedItem;
+
+                var uppdateradKategori = new Kategori
+                {
+                    Namn = TbxKategorier.Text.Trim()
+                };
+
+                await kategoriService.Uppdatera(valdKategori.Id, uppdateradKategori);
+
+                MessageBox.Show($"Kategori uppdaterad till '{uppdateradKategori.Namn}'");
+
+                TbxKategorier.Clear();
+                await LaddaKategorier();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fel: {ex.Message}");
+            }
         }
     }
 }
