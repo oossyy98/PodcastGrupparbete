@@ -179,6 +179,7 @@
             BtnTaBort.TabIndex = 12;
             BtnTaBort.Text = "Ta bort";
             BtnTaBort.UseVisualStyleBackColor = true;
+            BtnTaBort.Click += BtnTaBort_Click;
             // 
             // BtnUppdateraNamn
             // 
@@ -239,6 +240,7 @@
             ListKategorier.Name = "ListKategorier";
             ListKategorier.Size = new Size(149, 154);
             ListKategorier.TabIndex = 18;
+            ListKategorier.SelectedIndexChanged += ListKategorier_SelectedIndexChanged;
             // 
             // BtnTabortPodcast
             // 
@@ -278,6 +280,7 @@
             CBXKategori.Name = "CBXKategori";
             CBXKategori.Size = new Size(110, 23);
             CBXKategori.TabIndex = 22;
+            CBXKategori.SelectedIndexChanged += CBXKategori_SelectedIndexChanged;
             // 
             // Form1
             // 

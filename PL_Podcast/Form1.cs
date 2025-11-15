@@ -1,6 +1,7 @@
 using BL_BusinessLogic;
 using DAL_DataAccess;
 using Models;
+using System.Threading.Tasks;
 
 namespace PL_Podcast
 {
@@ -28,9 +29,26 @@ namespace PL_Podcast
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
+            await LaddaKategorier();
+        }
 
+        private async Task LaddaKategorier()
+        {
+            try
+            {
+                var kategorier = await kategoriService.HamtaAlla();
+
+                ListKategorier.DataSource = null;
+                ListKategorier.DataSource = kategorier;
+                ListKategorier.DisplayMember = "Namn";
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fel vid inläsning av kategorier: {ex.Message}");
+            }
         }
 
         private void BtnLaggtillPodcast_Click(object sender, EventArgs e)
@@ -51,12 +69,53 @@ namespace PL_Podcast
 
                 MessageBox.Show($"Kategori {nyKategori.Namn} tillagd!");
                 TbxKategorier.Clear();
-                
+
+                await LaddaKategorier();
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Fel: {ex.Message}");
             }
+        }
+
+        private void CBXKategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void BtnTaBort_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ListKategorier.SelectedItem == null)
+                {
+                    MessageBox.Show("Välj en kategori att ta bort.");
+                    return;
+                }
+
+                var valdKategori = (Kategori)ListKategorier.SelectedItem;
+
+                var resultat = MessageBox.Show
+                    ($"Är du säker på att du vill ta bort kategorin '{valdKategori.Namn}'?",
+                    "Bekräfta borttagning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (resultat == DialogResult.Yes)
+                {
+                    await kategoriService.TaBort(valdKategori.Id);
+                    MessageBox.Show($"Kategori '{valdKategori.Namn}' har tagits bort.");
+                    await LaddaKategorier();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fel: {ex.Message}");
+            }
+        }
+
+        private void ListKategorier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
