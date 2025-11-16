@@ -147,6 +147,7 @@
             TbxNamn.Name = "TbxNamn";
             TbxNamn.Size = new Size(110, 23);
             TbxNamn.TabIndex = 9;
+            TbxNamn.TextChanged += TbxNamn_TextChanged;
             // 
             // BtnLaggtillPodcast
             // 
@@ -252,6 +253,7 @@
             BtnTabortPodcast.TabIndex = 19;
             BtnTabortPodcast.Text = "Ta bort Podcast";
             BtnTabortPodcast.UseVisualStyleBackColor = true;
+            BtnTabortPodcast.Click += BtnTaBortPodcast_Click;
             // 
             // BtnUppdatera
             // 

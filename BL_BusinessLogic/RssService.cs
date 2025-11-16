@@ -39,7 +39,7 @@ namespace BL_BusinessLogic
             }
         } 
 
-        public string HamtaPodcastNamn(string url) 
+        public async Task<string> HamtaPodcastNamn(string url) 
         {
             try
             {
