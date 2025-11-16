@@ -252,7 +252,7 @@
             BtnTabortPodcast.TabIndex = 19;
             BtnTabortPodcast.Text = "Ta bort Podcast";
             BtnTabortPodcast.UseVisualStyleBackColor = true;
-            BtnTabortPodcast.Click += BtnTabortPodcast_Click;
+            BtnTabortPodcast.Click += BtnTaBortPodcast_Click;
             // 
             // BtnUppdatera
             // 
