@@ -214,5 +214,10 @@ namespace PL_Podcast
                 MessageBox.Show($"Fel: {ex.Message}");
             }
         }
+
+        private void BtnUppdatera_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
