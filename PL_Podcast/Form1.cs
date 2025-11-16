@@ -291,5 +291,10 @@ namespace PL_Podcast
 =======
 >>>>>>> 3fd47dbfb6f76cfcb2a0149e1a665e29c97bf39a
         }
+
+        private void BtnUppdatera_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

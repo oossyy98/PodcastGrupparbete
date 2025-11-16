@@ -48,7 +48,7 @@
             ListMinaPodcast = new ListBox();
             ListKategorier = new ListBox();
             BtnTabortPodcast = new Button();
-            BtnUppdatera = new Button();
+            BtnUppdateraPodcast = new Button();
             button4 = new Button();
             CBXKategori = new ComboBox();
             SuspendLayout();
@@ -255,15 +255,16 @@
             BtnTabortPodcast.UseVisualStyleBackColor = true;
             BtnTabortPodcast.Click += BtnTaBortPodcast_Click;
             // 
-            // BtnUppdatera
+            // BtnUppdateraPodcast
             // 
-            BtnUppdatera.Location = new Point(536, 181);
-            BtnUppdatera.Margin = new Padding(2, 1, 2, 1);
-            BtnUppdatera.Name = "BtnUppdatera";
-            BtnUppdatera.Size = new Size(82, 41);
-            BtnUppdatera.TabIndex = 20;
-            BtnUppdatera.Text = "Uppdatera Namn";
-            BtnUppdatera.UseVisualStyleBackColor = true;
+            BtnUppdateraPodcast.Location = new Point(536, 181);
+            BtnUppdateraPodcast.Margin = new Padding(2, 1, 2, 1);
+            BtnUppdateraPodcast.Name = "BtnUppdateraPodcast";
+            BtnUppdateraPodcast.Size = new Size(82, 41);
+            BtnUppdateraPodcast.TabIndex = 20;
+            BtnUppdateraPodcast.Text = "Uppdatera Namn";
+            BtnUppdateraPodcast.UseVisualStyleBackColor = true;
+            BtnUppdateraPodcast.Click += BtnUppdatera_Click;
             // 
             // button4
             // 
@@ -292,7 +293,7 @@
             ClientSize = new Size(898, 376);
             Controls.Add(CBXKategori);
             Controls.Add(button4);
-            Controls.Add(BtnUppdatera);
+            Controls.Add(BtnUppdateraPodcast);
             Controls.Add(BtnTabortPodcast);
             Controls.Add(ListKategorier);
             Controls.Add(ListMinaPodcast);
@@ -343,7 +344,7 @@
         private ListBox ListMinaPodcast;
         private ListBox ListKategorier;
         private Button BtnTabortPodcast;
-        private Button BtnUppdatera;
+        private Button BtnUppdateraPodcast;
         private Button button4;
         private ComboBox CBXKategori;
     }
